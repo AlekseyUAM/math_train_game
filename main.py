@@ -1,45 +1,80 @@
 from kivy.app import App
-from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.gridlayout import GridLayout
+from kivy.config import Config
+from kivymd.app import MDApp
+import random
 
-# Create both screens. Please note the root.manager.current: this is how
-# you can control the ScreenManager from kv. Each screen has by default a
-# property manager that gives you the instance of the ScreenManager used.
-Builder.load_string("""
-<MenuScreen>:
-    BoxLayout:
-        Button:
-            text: 'Goto settings'
-            on_press: root.manager.current = 'settings'
-        Button:
-            text: 'Quit'
 
-<SettingsScreen>:
-    BoxLayout:
-        Button:
-            text: 'My settings button'
-        Button:
-            text: 'Back to menu'
-            on_press: root.manager.current = 'menu'
-""")
+Config.set('graphics', 'resizable', 1)
 
-# Declare both screens
+
 class MenuScreen(Screen):
     pass
 
-class SettingsScreen(Screen):
+
+class GameScreen(Screen):
+    def __init__(self, *args, **kwargs):
+        self.answers = 0
+        self.answer = 0
+        self.div_options = [(i * j, i, j) for i in range(1, 11)
+                            for j in range(1, 11)]
+        super(GameScreen, self).__init__(*args, **kwargs)
+        self.update_labels()
+
+
+    def update_labels(self):
+        self.ids.answer_label.text = self.get_answers_text()
+        self.ids.question_label.text = self.get_question()
+        self.ids.entry.text = ''
+
+    def get_question(self):
+        action = random.choice(['+', '-', '/', '*'])
+        if action == '+':
+            number0 = random.randint(0, 99)
+            number1 = random.randint(0, 99)
+            self.answer = number0 + number1
+        elif action == '-':
+            number0 = random.randint(0, 99)
+            number1 = random.randint(0, number0)
+            self.answer = number0 - number1
+        elif action == '*':
+            number0 = random.randint(0, 10)
+            number1 = random.randint(0, 10)
+            self.answer = number0 * number1
+        elif action == '/':
+            choice = random.choice(self.div_options)
+            number0 = choice[0]
+            number1 = choice[1]
+            self.answer = choice[2]
+        return f'{number0} {action} {number1} = '
+
+    def get_answers_text(self):
+        return 'Ответов: ' + str(self.answers)
+
+    def check_answer(self, answer):
+        print(answer, self.answer, int(answer) == self.answer)
+        if int(answer) == self.answer:
+            self.answers += 1
+            self.update_labels()
+            self.ids.entry.background_color = 'white'
+        else:
+            self.ids.entry.background_color = 'red'
+
+
+class CalcGridLayout(GridLayout):
     pass
 
-class TestApp(App):
+
+class TrainApp(App):
 
     def build(self):
-        # Create the screen manager
         sm = ScreenManager()
         sm.add_widget(MenuScreen(name='menu'))
-        sm.add_widget(SettingsScreen(name='settings'))
+        sm.add_widget(GameScreen(name='game'))
 
         return sm
 
 
 if __name__ == '__main__':
-    TestApp().run()
+    TrainApp().run()
