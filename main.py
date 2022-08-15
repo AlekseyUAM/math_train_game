@@ -15,13 +15,12 @@ class MenuScreen(Screen):
 
 class GameScreen(Screen):
     def __init__(self, *args, **kwargs):
+        super(GameScreen, self).__init__(**kwargs)
         self.answers = 0
         self.answer = 0
         self.div_options = [(i * j, i, j) for i in range(1, 11)
                             for j in range(1, 11)]
-        super(GameScreen, self).__init__(*args, **kwargs)
         self.update_labels()
-
 
     def update_labels(self):
         self.ids.answer_label.text = self.get_answers_text()
@@ -53,8 +52,7 @@ class GameScreen(Screen):
         return 'Ответов: ' + str(self.answers)
 
     def check_answer(self, answer):
-        print(answer, self.answer, int(answer) == self.answer)
-        if int(answer) == self.answer:
+        if answer and int(answer) == self.answer:
             self.answers += 1
             self.update_labels()
             self.ids.entry.background_color = 'white'
