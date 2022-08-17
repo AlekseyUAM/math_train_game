@@ -2,10 +2,10 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.config import Config
-from kivymd.app import MDApp
 import random
 
 
+__version__ = '0.0.1'
 Config.set('graphics', 'resizable', 1)
 
 
@@ -23,6 +23,7 @@ class GameScreen(Screen):
         self.update_labels()
 
     def update_labels(self):
+        print(self.ids)
         self.ids.answer_label.text = self.get_answers_text()
         self.ids.question_label.text = self.get_question()
         self.ids.entry.text = ''
