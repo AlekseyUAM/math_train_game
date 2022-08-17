@@ -14,6 +14,7 @@
 <MenuScreen>:
     BoxLayout:
         orientation: 'vertical'
+
         Button:
             text: 'Начать'
             font_size: 64
@@ -27,6 +28,22 @@
                     pos: self.pos
                     size: self.size
             on_press: root.manager.current = 'game'
+            size: 200, 200
+            size_hint: 1, None
+
+        Image:
+            source: 'img/1_5.png'
+            size: self.texture_size
+            allow_stretch: True
+            keep_ratio: True
+            background_color: (1, 1, 1, 1)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            background_normal: ''
 
         Button:
             text: 'Выход'
@@ -41,10 +58,11 @@
                     pos: self.pos
                     size: self.size
             on_press: quit()
+            size: 200, 200
+            size_hint: 1, None
 
 <GameScreen>:
     CalcGridLayout:
-        id: calculator
         rows: 6
         padding: 10
         spacing: 10
@@ -71,7 +89,7 @@
         BoxLayout:
             Label:
                 id: question_label
-                font_size: self.height/1.5
+                font_size: self.height/2.1
                 color: (0.067, 0.6, 0.62, 1)
                 canvas.before:
                     Color:
@@ -177,6 +195,8 @@
                 Rectangle:
                     pos: self.pos
                     size: self.size
+            size: 200, 200
+            size_hint: 1, None
 
         Image:
             source: 'img/1_4.png'
@@ -189,6 +209,8 @@
                     pos: self.pos
                     size: self.size
             background_normal: ''
+            allow_stretch: True
+            keep_ratio: True
 
         Button:
             text: 'Продолжить'
@@ -203,6 +225,8 @@
                     pos: self.pos
                     size: self.size
             on_press: root.manager.current = 'game'
+            size: 200, 200
+            size_hint: 1, None
 
 
 <ImageFalseScreen>:
@@ -218,6 +242,8 @@
                 Rectangle:
                     pos: self.pos
                     size: self.size
+            size: 200, 200
+            size_hint: 1, None
 
         Image:
             source: 'img/2_2.png'
@@ -230,6 +256,8 @@
                     pos: self.pos
                     size: self.size
             background_normal: ''
+            allow_stretch: True
+            keep_ratio: True
 
         Button:
             text: 'Продолжить'
@@ -244,3 +272,5 @@
                     pos: self.pos
                     size: self.size
             on_press: root.manager.current = 'game'
+            size: 200, 200
+            size_hint: 1, None
