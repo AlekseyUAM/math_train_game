@@ -16,6 +16,9 @@
         orientation: 'vertical'
         Button:
             text: 'Начать'
+            font_size: 64
+            background_color: (0.696, 0.945, 0.961, 1)
+            background_normal: ''
             color: (0.067, 0.6, 0.62, 1)
             canvas.before:
                 Color:
@@ -23,12 +26,13 @@
                 Rectangle:
                     pos: self.pos
                     size: self.size
-            font_size: self.height/2
             on_press: root.manager.current = 'game'
-            background_color: (0.894, 0.976, 0.961, 1)
-            background_normal: ''
+
         Button:
             text: 'Выход'
+            font_size: 64
+            background_color: (0.894, 0.976, 0.961, 1)
+            background_normal: ''
             color: (0.067, 0.6, 0.62, 1)
             canvas.before:
                 Color:
@@ -36,10 +40,7 @@
                 Rectangle:
                     pos: self.pos
                     size: self.size
-            font_size: self.height/2
             on_press: quit()
-            background_color: (0.894, 0.976, 0.961, 1)
-            background_normal: ''
 
 <GameScreen>:
     CalcGridLayout:
@@ -99,7 +100,8 @@
                 text: "9"
                 on_press: entry.text += self.text
             CustButton:
-                text: "Удалить"
+                text: "<-"
+                font_size: 32
                 on_press: entry.text = entry.text[:-1]
 
         BoxLayout:
@@ -114,7 +116,8 @@
                 text: "6"
                 on_press: entry.text += self.text
             CustButton:
-                text: "Очистить"
+                text: "C"
+                font_size: 32
                 on_press: entry.text = ''
 
         BoxLayout:
@@ -134,10 +137,110 @@
 
         BoxLayout:
             spacing: 10
-            CustButton:
+            Button:
                 text: 'Проверить'
+                font_size: 64
+                background_color: (1, 1, 1, 1)
+                background_normal: ''
+                color: (0.067, 0.6, 0.62, 1)
+                canvas.before:
+                    Color:
+                        rgba: self.background_color
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
                 on_press: root.check_answer(entry.text)
-            CustButton:
+            Button:
                 text: 'Назад'
+                font_size: 64
+                background_color: (1, 1, 1, 1)
+                background_normal: ''
+                color: (0.067, 0.6, 0.62, 1)
+                canvas.before:
+                    Color:
+                        rgba: self.background_color
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
                 on_press: root.manager.current = 'menu'
 
+<ImageTrueScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Правильно!'
+            font_size: 64
+            color: (0.067, 0.6, 0.62, 1)
+            canvas.before:
+                Color:
+                    rgba: (0.894, 0.976, 0.961, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        Image:
+            source: 'img/1_4.png'
+            size: self.texture_size
+            background_color: (0.696, 0.945, 0.961, 1)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            background_normal: ''
+
+        Button:
+            text: 'Продолжить'
+            font_size: 64
+            background_color: (1, 1, 1, 1)
+            background_normal: ''
+            color: (0.067, 0.6, 0.62, 1)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            on_press: root.manager.current = 'game'
+
+
+<ImageFalseScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Неправильно!'
+            font_size: 64
+            color: 'red'
+            canvas.before:
+                Color:
+                    rgba: (0.067, 0.6, 0.62, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        Image:
+            source: 'img/2_2.png'
+            size: self.texture_size
+            background_color: (0.696, 0.945, 0.961, 1)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            background_normal: ''
+
+        Button:
+            text: 'Продолжить'
+            font_size: 64
+            background_color: (1, 1, 1, 1)
+            background_normal: ''
+            color: (0.067, 0.6, 0.62, 1)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            on_press: root.manager.current = 'game'

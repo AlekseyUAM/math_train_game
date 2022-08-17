@@ -5,7 +5,7 @@ from kivy.config import Config
 from random import choice, randint
 
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 Config.set('graphics', 'resizable', 1)
 
 
@@ -13,7 +13,11 @@ class MenuScreen(Screen):
     pass
 
 
-class ImageScreen(Screen):
+class ImageTrueScreen(Screen):
+    pass
+
+
+class ImageFalseScreen(Screen):
     pass
 
 
@@ -22,8 +26,7 @@ class GameScreen(Screen):
         super(GameScreen, self).__init__(**kwargs)
         self.answers = 0
         self.answer = 0
-        self.div_options = [(i * j, i, j) for i in range(1, 11)
-                            for j in range(1, 11)]
+        self.div_options = [(i * j, i, j) for i in range(1, 11) for j in range(1, 11)]
         self.update_labels()
 
     def update_labels(self):
@@ -61,8 +64,10 @@ class GameScreen(Screen):
             self.answers += 1
             self.update_labels()
             self.ids.entry.background_color = 'white'
+            self.manager.current = 'image_true'
         else:
             self.ids.entry.background_color = 'red'
+            self.manager.current = 'image_false'
 
 
 class CalcGridLayout(GridLayout):
@@ -75,6 +80,8 @@ class TrainApp(App):
         sm = ScreenManager()
         sm.add_widget(MenuScreen(name='menu'))
         sm.add_widget(GameScreen(name='game'))
+        sm.add_widget(ImageTrueScreen(name='image_true'))
+        sm.add_widget(ImageFalseScreen(name='image_false'))
 
         return sm
 
