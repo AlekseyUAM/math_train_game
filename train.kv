@@ -1,18 +1,45 @@
 # Custom button
 <CustButton@Button>:
-    font_size: 32
+    font_size: self.height/2
+    background_color: (0.696, 0.945, 0.961, 1)
+    background_normal: ''
+    color: (0.067, 0.6, 0.62, 1)
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 <MenuScreen>:
     BoxLayout:
         orientation: 'vertical'
         Button:
-            text: 'Начать тренировку'
-            font_size: 32
+            text: 'Начать'
+            color: (0.067, 0.6, 0.62, 1)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            font_size: self.height/2
             on_press: root.manager.current = 'game'
+            background_color: (0.894, 0.976, 0.961, 1)
+            background_normal: ''
         Button:
             text: 'Выход'
-            font_size: 32
+            color: (0.067, 0.6, 0.62, 1)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            font_size: self.height/2
             on_press: quit()
+            background_color: (0.894, 0.976, 0.961, 1)
+            background_normal: ''
 
 <GameScreen>:
     CalcGridLayout:
@@ -20,20 +47,42 @@
         rows: 6
         padding: 10
         spacing: 10
+        background_color: (0.894, 0.976, 0.961, 1)
+        canvas.before:
+            Color:
+                rgba: self.background_color
+            Rectangle:
+                pos: self.pos
+                size: self.size
 
         BoxLayout:
             Label:
                 id: answer_label
-                font_size: 32
+                font_size: self.height/2
+                color: (0.067, 0.6, 0.62, 1)
+                canvas.before:
+                    Color:
+                        rgba: (0.894, 0.976, 0.961, 1)
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
 
         BoxLayout:
             Label:
                 id: question_label
-                font_size: 32
+                font_size: self.height/1.5
+                color: (0.067, 0.6, 0.62, 1)
+                canvas.before:
+                    Color:
+                        rgba: (0.894, 0.976, 0.961, 1)
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
                 size_hint: (1, 0.6)
             TextInput:
                 id: entry
-                font_size: 31
+                font_size: self.height/1.5
+                foreground_color: (0.067, 0.6, 0.62, 1)
                 multiline: False
                 halign: 'center'
                 size_hint: (1, 0.6)
@@ -85,12 +134,10 @@
 
         BoxLayout:
             spacing: 10
-            Button:
+            CustButton:
                 text: 'Проверить'
-                font_size: 32
                 on_press: root.check_answer(entry.text)
-            Button:
+            CustButton:
                 text: 'Назад'
-                font_size: 32
                 on_press: root.manager.current = 'menu'
 

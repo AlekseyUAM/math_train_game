@@ -2,7 +2,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.config import Config
-import random
+from random import choice, randint
 
 
 __version__ = '0.0.1'
@@ -10,6 +10,10 @@ Config.set('graphics', 'resizable', 1)
 
 
 class MenuScreen(Screen):
+    pass
+
+
+class ImageScreen(Screen):
     pass
 
 
@@ -29,24 +33,24 @@ class GameScreen(Screen):
         self.ids.entry.text = ''
 
     def get_question(self):
-        action = random.choice(['+', '-', '/', '*'])
+        action = choice(['+', '-', '/', '*'])
         if action == '+':
-            number0 = random.randint(0, 99)
-            number1 = random.randint(0, 99)
+            number0 = randint(0, 99)
+            number1 = randint(0, 99)
             self.answer = number0 + number1
         elif action == '-':
-            number0 = random.randint(0, 99)
-            number1 = random.randint(0, number0)
+            number0 = randint(0, 99)
+            number1 = randint(0, number0)
             self.answer = number0 - number1
         elif action == '*':
-            number0 = random.randint(0, 10)
-            number1 = random.randint(0, 10)
+            number0 = randint(0, 10)
+            number1 = randint(0, 10)
             self.answer = number0 * number1
         elif action == '/':
-            choice = random.choice(self.div_options)
-            number0 = choice[0]
-            number1 = choice[1]
-            self.answer = choice[2]
+            ch = choice(self.div_options)
+            number0 = ch[0]
+            number1 = ch[1]
+            self.answer = ch[2]
         return f'{number0} {action} {number1} = '
 
     def get_answers_text(self):
