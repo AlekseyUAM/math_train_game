@@ -60,13 +60,11 @@ class GameScreen(Screen):
         return 'Ответов: ' + str(self.answers)
 
     def check_answer(self, answer):
-        if answer and int(answer) == self.answer:
+        if answer and answer.isdigit() and int(answer) == self.answer:
             self.answers += 1
             self.update_labels()
-            self.ids.entry.background_color = 'white'
             self.manager.current = 'image_true'
         else:
-            self.ids.entry.background_color = 'red'
             self.manager.current = 'image_false'
 
 
