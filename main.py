@@ -37,6 +37,15 @@ class GameScreen(Screen):
         self.ids.entry.text = ''
 
     def get_question(self):
+        '''
+        to do:
+        добавить варианты заданий
+        -скобки
+        -отрицательные числа
+        -квадрат
+        -квадратный корень
+        -дроби
+        '''
         action = choice(['+', '-', '/', '*'])
         is_eq = choice([True, False])
         if is_eq:
