@@ -1,9 +1,13 @@
-# Custom button
+#:set BACKG_COLOR (0.894, 0.976, 0.961, 1)
+#:set TEXT_COLOR (0.067, 0.6, 0.62, 1)
+#:set BUTTON_COLOR (0.696, 0.945, 0.961, 1)
+
+# Custom buttons
 <CustButton@Button>:
     font_size: self.height/2
-    background_color: (0.696, 0.945, 0.961, 1)
+    background_color: BUTTON_COLOR
     background_normal: ''
-    color: (0.067, 0.6, 0.62, 1)
+    color: TEXT_COLOR
     canvas.before:
         Color:
             rgba: self.background_color
@@ -11,65 +15,29 @@
             pos: self.pos
             size: self.size
 
-<MenuScreen>:
-    BoxLayout:
-        orientation: 'vertical'
+<SetButton@Button>:
+    font_size: self.height/2
+    background_color: BUTTON_COLOR
+    background_normal: ''
+    color: TEXT_COLOR
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
-        Button:
-            text: 'Начать'
-            font_size: 64
-            background_color: (0.696, 0.945, 0.961, 1)
-            background_normal: ''
-            color: (0.067, 0.6, 0.62, 1)
-            canvas.before:
-                Color:
-                    rgba: self.background_color
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            on_press: root.manager.current = 'game'
-            size: 200, 200
-            size_hint: 1, None
 
-        Image:
-            source: 'img/1_5.png'
-            size: self.texture_size
-            allow_stretch: True
-            keep_ratio: True
-            background_color: (1, 1, 1, 1)
-            canvas.before:
-                Color:
-                    rgba: self.background_color
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            background_normal: ''
-
-        Button:
-            text: 'Выход'
-            font_size: 64
-            background_color: (0.894, 0.976, 0.961, 1)
-            background_normal: ''
-            color: (0.067, 0.6, 0.62, 1)
-            canvas.before:
-                Color:
-                    rgba: self.background_color
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            on_press: quit()
-            size: 200, 200
-            size_hint: 1, None
 
 <GameScreen>:
     CalcGridLayout:
         rows: 6
         padding: 10
         spacing: 10
-        background_color: (0.894, 0.976, 0.961, 1)
+        background_color: BACKG_COLOR
         canvas.before:
             Color:
-                rgba: self.background_color
+                rgba: BACKG_COLOR
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -78,10 +46,10 @@
             Label:
                 id: answer_label
                 font_size: self.height/2
-                color: (0.067, 0.6, 0.62, 1)
+                color: TEXT_COLOR
                 canvas.before:
                     Color:
-                        rgba: (0.894, 0.976, 0.961, 1)
+                        rgba: BACKG_COLOR
                     Rectangle:
                         pos: self.pos
                         size: self.size
@@ -89,11 +57,11 @@
         BoxLayout:
             Label:
                 id: question_label
-                font_size: self.height/2.1
-                color: (0.067, 0.6, 0.62, 1)
+                font_size: self.height/2.2
+                color: TEXT_COLOR
                 canvas.before:
                     Color:
-                        rgba: (0.894, 0.976, 0.961, 1)
+                        rgba: BACKG_COLOR
                     Rectangle:
                         pos: self.pos
                         size: self.size
@@ -101,7 +69,7 @@
             TextInput:
                 id: entry
                 font_size: self.height/1.5
-                foreground_color: (0.067, 0.6, 0.62, 1)
+                foreground_color: TEXT_COLOR
                 multiline: False
                 halign: 'center'
                 size_hint: (1, 0.6)
@@ -118,9 +86,9 @@
                 text: "9"
                 on_press: entry.text += self.text
             CustButton:
-                text: "<-"
+                text: "+/-"
                 font_size: 32
-                on_press: entry.text = entry.text[:-1]
+                on_press: entry.text = '-' + entry.text if not entry.text or entry.text[0] != '-' else entry.text[1:]
 
         BoxLayout:
             spacing: 10
@@ -160,7 +128,7 @@
                 font_size: 64
                 background_color: (1, 1, 1, 1)
                 background_normal: ''
-                color: (0.067, 0.6, 0.62, 1)
+                color: TEXT_COLOR
                 canvas.before:
                     Color:
                         rgba: self.background_color
@@ -173,7 +141,7 @@
                 font_size: 64
                 background_color: (1, 1, 1, 1)
                 background_normal: ''
-                color: (0.067, 0.6, 0.62, 1)
+                color: TEXT_COLOR
                 canvas.before:
                     Color:
                         rgba: self.background_color
@@ -188,10 +156,10 @@
         Label:
             text: 'Правильно!'
             font_size: 64
-            color: (0.067, 0.6, 0.62, 1)
+            color: TEXT_COLOR
             canvas.before:
                 Color:
-                    rgba: (0.894, 0.976, 0.961, 1)
+                    rgba: BACKG_COLOR
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -201,10 +169,10 @@
         Image:
             source: 'img/1_4.png'
             size: self.texture_size
-            background_color: (0.696, 0.945, 0.961, 1)
+            background_color: BUTTON_COLOR
             canvas.before:
                 Color:
-                    rgba: self.background_color
+                    rgba: BUTTON_COLOR
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -217,7 +185,7 @@
             font_size: 64
             background_color: (1, 1, 1, 1)
             background_normal: ''
-            color: (0.067, 0.6, 0.62, 1)
+            color: TEXT_COLOR
             canvas.before:
                 Color:
                     rgba: self.background_color
@@ -238,7 +206,7 @@
             color: 'red'
             canvas.before:
                 Color:
-                    rgba: (0.067, 0.6, 0.62, 1)
+                    rgba: TEXT_COLOR
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -248,10 +216,10 @@
         Image:
             source: 'img/2_2.png'
             size: self.texture_size
-            background_color: (0.696, 0.945, 0.961, 1)
+            background_color: BUTTON_COLOR
             canvas.before:
                 Color:
-                    rgba: self.background_color
+                    rgba: BUTTON_COLOR
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -264,7 +232,7 @@
             font_size: 64
             background_color: (1, 1, 1, 1)
             background_normal: ''
-            color: (0.067, 0.6, 0.62, 1)
+            color: TEXT_COLOR
             canvas.before:
                 Color:
                     rgba: self.background_color
@@ -274,3 +242,4 @@
             on_press: root.manager.current = 'game'
             size: 200, 200
             size_hint: 1, None
+

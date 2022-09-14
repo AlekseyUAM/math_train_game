@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = math_train_0.3
+title = math_train_0.4
 
 # (str) Package name
 package.name = math_train
@@ -29,7 +29,7 @@ source.include_exts = py,png,jpg,kv,atlas
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.0.3
+version = 0.0.4
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
